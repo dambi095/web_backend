@@ -9,10 +9,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserService {
 
     @Autowired
@@ -21,13 +23,20 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public int insertUser(UserDTO user){
+        System.out.println("*-*-*-*-* UserService ");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return mapper.insetUser(user);
+    }
+
+    /*
     // 유저 정보 불러옴
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO user = mapper.findUserByEmail(username);
+        // UserDTO user = mapper.findUserByEmail(username);
 
         //권한설정
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        // List<GrantedAuthority> authorities = new ArrayList<>();
+        //authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
@@ -38,5 +47,5 @@ public class UserService {
         UserDetails userDetails = this.loadUserByUsername(user.getEmail());
         return passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
     }
-
+    */
 }

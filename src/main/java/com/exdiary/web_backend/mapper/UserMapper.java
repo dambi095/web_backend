@@ -4,5 +4,9 @@ import com.exdiary.web_backend.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public class UserMapper {
+public interface UserMapper {
+
+    // 유저 회원가입 하기
+    public int insetUser(UserDTO user);
+
 }

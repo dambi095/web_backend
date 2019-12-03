@@ -12,7 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-/** 토큰 관련 메소드 **/
+
+/** 토큰 관련 메소드
 public class JwtTokenProvider {
 
     @Value("${jwt.expiration}")
@@ -65,6 +66,7 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
     //사용자 인증
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userService.loadUserByUsername(getUsername(token));
@@ -77,3 +79,4 @@ public class JwtTokenProvider {
     }
 
 }
+ **/
