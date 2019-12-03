@@ -10,11 +10,10 @@ public class UserDTO {
     private int user_num;
     private String email;
     private String password;
+    private String username;
     private Date joindate;
     private String phone;
     private String profile_img;
-    private String nickname;
-    private String gender;
     private String token;
 
 }
