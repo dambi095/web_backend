@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 @Component
-public class MariaDBRunner implements ApplicationRunner {
+public class MySQLRunner implements ApplicationRunner {
     @Autowired
     DataSource dataSource;
 
