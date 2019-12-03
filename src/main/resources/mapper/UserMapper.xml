@@ -5,7 +5,7 @@
     <!-- 유저 회원가입 하기 -->
     <insert id="insetUser" parameterType="com.exdiary.web_backend.dto.UserDTO">
             INSERT INTO user (email,password,username)
-            VALUES( #{email},#{password},${username} )
+            VALUES( #{email},#{password},#{username} )
     </insert>
 
     <!-- email로 user 가져오기 -->
