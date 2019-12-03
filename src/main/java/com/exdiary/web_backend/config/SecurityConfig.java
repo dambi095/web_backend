@@ -1,7 +1,7 @@
 package com.exdiary.web_backend.config;
 
-//import com.exdiary.web_backend.security.JwtTokenFilter;
-//import com.exdiary.web_backend.security.JwtTokenProvider;
+import com.exdiary.web_backend.security.JwtTokenFilter;
+import com.exdiary.web_backend.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //@Autowired
-    //JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     @Bean
     @Override
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    /*
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/logIn","/user/insertUser").permitAll()
                 .anyRequest().authenticated();
     }
-    */
+
 
 }
 

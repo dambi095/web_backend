@@ -29,18 +29,19 @@ public class UserService {
         return mapper.insetUser(user);
     }
 
-    /*
+
     // 유저 정보 불러옴
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // UserDTO user = mapper.findUserByEmail(username);
+        UserDTO user = mapper.findUserByEmail(username);
 
         //권한설정
-        // List<GrantedAuthority> authorities = new ArrayList<>();
-        //authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
 
+    /*
     public boolean logIn(UserDTO user) {
 
         //UserDetails :: Spring Security에서 사용자의 정보를 담는 인터페이스
