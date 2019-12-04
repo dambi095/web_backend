@@ -4,12 +4,15 @@ import com.exdiary.web_backend.dto.UserDTO;
 import com.exdiary.web_backend.security.JwtTokenProvider;
 import com.exdiary.web_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -33,7 +36,6 @@ public class UserController {
     @RequestMapping(value = "insertUser", method = RequestMethod.POST)
     public int insertUser(@RequestBody UserDTO user) {
 
-        System.out.println("*-*-*-* UserController user: " + user);
         int result;
 
         try {
@@ -47,8 +49,20 @@ public class UserController {
             result = 0;
         }
 
-        System.out.println("*-*-*-* UserController result: " + result);
+        System.out.println("*-*-*-* UserController insertUser result: " + result);
 
         return result;
+    }
+
+    /*
+     * @method Name : getUserInfo()
+     * @date * @author :2019.12.04 : 권담비
+     * @description : 유저 정보 가져오기
+     */
+    @RequestMapping(value="getUserInfo", method = RequestMethod.POST)
+    public UserDTO getUserInfo (@RequestBody UserDTO email){
+        System.out.println("*-*-*-* UserController getUserInfo user: "+ email);
+        UserDTO userInfo = service.getUserInfo(email);
+        return userInfo;
     }
 }

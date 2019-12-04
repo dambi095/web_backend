@@ -23,16 +23,23 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // 회원가입하기
     public int insertUser(UserDTO user){
-        System.out.println("*-*-*-*-* UserService ");
+        System.out.println("*-*-*-*-* UserService insertUser");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return mapper.insetUser(user);
     }
 
+    // 유저 정보 가져오기
+    public UserDTO getUserInfo(UserDTO user) {
+        System.out.println("*-*-*-*-* getUserInfo");
+        UserDTO userInfo = mapper.findUserByEmail(user.getEmail());
+        return userInfo;
+    }
 
-    // 유저 정보 불러옴
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO user = mapper.findUserByEmail(username);
+    // 유저정보 가져온 후 권한설정 하기
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserDTO user = mapper.findUserByEmail(email);
 
         //권한설정
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -40,6 +47,7 @@ public class UserService {
 
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
+
 
     /*
     public boolean logIn(UserDTO user) {
