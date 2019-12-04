@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -59,10 +60,27 @@ public class UserController {
      * @date * @author :2019.12.04 : 권담비
      * @description : 유저 정보 가져오기
      */
-    @RequestMapping(value="getUserInfo", method = RequestMethod.POST)
-    public UserDTO getUserInfo (@RequestBody UserDTO email){
-        System.out.println("*-*-*-* UserController getUserInfo user: "+ email);
-        UserDTO userInfo = service.getUserInfo(email);
+    @RequestMapping(value = "getUserInfo", method = RequestMethod.POST)
+    public UserDTO getUserInfo(@RequestBody UserDTO email) {
+        System.out.println("*-*-*-* UserController getUserInfo user: " + email);
+
+        UserDTO userInfo = service.getUserInfo(email.getEmail());
+
         return userInfo;
+    }
+
+
+    /*
+     * @method Name : registerCheck()
+     * @date * @author :2019.12.04 : 권담비
+     * @description : 가입된 유저인지 체크하기
+     */
+    @RequestMapping(value = "registerCheck", method = RequestMethod.POST)
+    public int registerCheck(@RequestBody UserDTO email) {
+        System.out.println("*-*-*-* UserController registerCheck user: " + email);
+
+        int result = service.registerCheck(email.getEmail());
+
+        return result;
     }
 }

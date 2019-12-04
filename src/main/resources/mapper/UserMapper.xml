@@ -8,6 +8,11 @@
             VALUES( #{email},#{password},#{username} )
     </insert>
 
+    <!-- 회원 가입여부 가져오기  -->
+    <select id="registerCheck" resultType="int">
+        SELECT COUNT(*) FROM user where email=#{email}
+    </select>
+
     <!-- email로 user 가져오기 -->
     <select id="findUserByEmail" resultType="com.exdiary.web_backend.dto.UserDTO">
             SELECT * FROM user WHERE email=#{email}

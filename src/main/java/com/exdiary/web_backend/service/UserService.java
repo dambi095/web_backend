@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +25,15 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     // 회원가입하기
-    public int insertUser(UserDTO user){
+    public int insertUser(UserDTO user) {
         System.out.println("*-*-*-*-* UserService insertUser");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return mapper.insetUser(user);
     }
 
-    // 유저 정보 가져오기
-    public UserDTO getUserInfo(UserDTO user) {
-        System.out.println("*-*-*-*-* getUserInfo");
-        UserDTO userInfo = mapper.findUserByEmail(user.getEmail());
-        return userInfo;
+    // 가입된 유저인지 체크하기
+    public int registerCheck(String email) {
+        return mapper.registerCheck(email);
     }
 
     // 유저정보 가져온 후 권한설정 하기
@@ -48,6 +47,12 @@ public class UserService {
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
 
+    // 유저 정보 가져오기
+    public UserDTO getUserInfo(String email) {
+        UserDTO userInfo = mapper.findUserByEmail(email);
+        System.out.println("*-*-*-*-* getUserInfo userInfo" + userInfo + "email: " + email);
+        return userInfo;
+    }
 
     /*
     public boolean logIn(UserDTO user) {
