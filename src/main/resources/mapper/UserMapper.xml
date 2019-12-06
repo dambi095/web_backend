@@ -17,4 +17,12 @@
     <select id="findUserByEmail" resultType="com.exdiary.web_backend.dto.UserDTO">
             SELECT * FROM user WHERE email=#{email}
     </select>
+
+    <!-- 유저 정보 업데이트 하기  -->
+    <update id="updateUserInfo" parameterType="com.exdiary.web_backend.dto.UserDTO" >
+
+        UPDATE user SET phone=#{phone}, profile_img=#{profile_img}
+        WHERE email = #{email}
+
+    </update>
 </mapper>

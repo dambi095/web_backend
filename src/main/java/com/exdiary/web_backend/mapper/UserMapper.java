@@ -15,4 +15,7 @@ public interface UserMapper {
     // login 할 경우 email로 user 정보 가져오기
     public UserDTO findUserByEmail (String email);
 
+    // 유저 정보 업데이트 하기
+    public int updateUserInfo(UserDTO user);
+
 }

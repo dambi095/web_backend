@@ -76,11 +76,21 @@ public class UserController {
      * @description : 가입된 유저인지 체크하기
      */
     @RequestMapping(value = "registerCheck", method = RequestMethod.POST)
-    public int registerCheck(@RequestBody UserDTO email) {
-        System.out.println("*-*-*-* UserController registerCheck user: " + email);
+    public int registerCheck(@RequestBody UserDTO user) {
+        System.out.println("*-*-*-* UserController registerCheck user: " + user);
 
-        int result = service.registerCheck(email.getEmail());
+        int result = service.registerCheck(user.getEmail());
 
         return result;
+    }
+
+    /*
+     * @method Name : updateUserInfo()
+     * @date * @author :2019.12.04 : 권담비
+     * @description : 이메일 인증을 위 시크릿 코드 값에 업데이트하기
+     */
+    @RequestMapping(value = "updateUserInfo", method = RequestMethod.POST)
+    public int updateUserInfo(@RequestBody UserDTO user) {
+        return service.updateUserInfo(user);
     }
 }

@@ -54,6 +54,12 @@ public class UserService {
         return userInfo;
     }
 
+    // 유저 정보 업데이트 하기
+    public int updateUserInfo(UserDTO user) {
+        System.out.println("*-*-*-*-* getUserInfo updateUserInfo" + user);
+        return mapper.updateUserInfo(user);
+    }
+
     /*
     public boolean logIn(UserDTO user) {
 
