@@ -15,5 +15,6 @@ public class UserDTO {
     private String phone;
     private String profile_img;
     private String token;
-
+    private String auth_key;
+    private int auth_status;
 }

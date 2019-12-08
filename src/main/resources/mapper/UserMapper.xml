@@ -20,9 +20,13 @@
 
     <!-- 유저 정보 업데이트 하기  -->
     <update id="updateUserInfo" parameterType="com.exdiary.web_backend.dto.UserDTO" >
-
         UPDATE user SET phone=#{phone}, profile_img=#{profile_img}
-        WHERE email = #{email}
+        WHERE email=#{email}
+    </update>
 
+    <!-- -->
+    <update id="setAuthKey" >
+        UPDATE user SET auth_key=#{param1}
+        WHERE email=#{param2}
     </update>
 </mapper>

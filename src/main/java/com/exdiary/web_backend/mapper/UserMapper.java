@@ -18,4 +18,5 @@ public interface UserMapper {
     // 유저 정보 업데이트 하기
     public int updateUserInfo(UserDTO user);
 
+    public int setAuthKey(String auth_key, String email);
 }
