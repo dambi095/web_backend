@@ -40,12 +40,15 @@ public class UserService {
     public int insertUser(UserDTO user) throws Exception {
         try {
 
-            System.out.println("*-*-*-*-* UserService insertUser");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-            mapper.insetUser(user);
+            int result = mapper.insetUser(user);
 
-            return 1;
+            if(result > 0) {
+                System.out.println("ssss"+mapper.deleteLoginAuth(user.getEmail()));
+                mapper.deleteLoginAuth(user.getEmail());
+                return 1;
+            }
         } catch (Exception es) {
             es.printStackTrace();
         }

@@ -27,4 +27,6 @@ public interface UserMapper {
     public int sendEmailCheck(String email);
 
     public int updateLoginAuth(String email, String auth_key);
+
+    public int deleteLoginAuth(String email);
 }

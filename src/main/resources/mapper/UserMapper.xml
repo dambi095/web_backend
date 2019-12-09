@@ -45,4 +45,9 @@
         UPDATE login_auth SET email=#{param1},auth_key=#{param2}, send_date=now()
         WHERE email=#{param1}
     </update>
+
+    <!-- 가입이 완료된 유저는 login_auth 컬럼에서 삭제하기 -->
+    <delete id="deleteLoginAuth" parameterType="String" >
+        DELETE FROM login_auth WHERE email=#{email}
+    </delete>
 </mapper>
