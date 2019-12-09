@@ -24,9 +24,25 @@
         WHERE email=#{email}
     </update>
 
-    <!-- -->
+    <!-- 인증번호 저장 -->
     <insert id="setAuthKey" parameterType="String">
         INSERT INTO login_auth (auth_key,email)
         VALUES (#{param1}, #{param2})
     </insert>
+
+    <!-- 인증 번호 확인 -->
+    <select id="confirmLoginSecret" resultType="int">
+        SELECT COUNT(*) FROM login_auth where email=#{email} AND auth_key=#{auth_key}
+    </select>
+
+    <!-- 이미 인증번호 발송한 이메일인지 확인 -->
+    <select id="sendEmailCheck" resultType="int">
+        SELECT COUNT(*) FROM login_auth where email=#{email}
+    </select>
+
+    <!-- 인증번호 업데이트 -->
+    <update id="updateLoginAuth" >
+        UPDATE login_auth SET email=#{param1},auth_key=#{param2}, send_date=now()
+        WHERE email=#{param1}
+    </update>
 </mapper>

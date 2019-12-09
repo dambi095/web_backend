@@ -1,5 +1,6 @@
 package com.exdiary.web_backend.controller;
 
+import com.exdiary.web_backend.dto.AuthDTO;
 import com.exdiary.web_backend.dto.UserDTO;
 import com.exdiary.web_backend.security.JwtTokenProvider;
 import com.exdiary.web_backend.service.UserService;
@@ -119,4 +120,17 @@ public class UserController {
 
         return map;
     }
+
+
+    /*
+     * @method Name : confirmLoginSecret()
+     * @date * @author :2019.12.09 : 권담비
+     * @description : 이메일 인증코드 값 확인하기
+     */
+    @RequestMapping(value="confirmLoginSecret", method = RequestMethod.POST)
+    public int confirmLoginSecret(@RequestBody AuthDTO auth){
+        return service.confirmLoginSecret(auth.getEmail(),auth.getAuth_key());
+    }
+
+
 }

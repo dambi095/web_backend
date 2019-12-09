@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,27 +71,33 @@ public class UserService {
     // 유저 정보 가져오기
     public UserDTO getUserInfo(String email) {
         UserDTO userInfo = mapper.findUserByEmail(email);
-        System.out.println("*-*-*-*-* getUserInfo userInfo" + userInfo + "email: " + email);
         return userInfo;
     }
 
     // 유저 정보 업데이트 하기
     public int updateUserInfo(UserDTO user) {
-        System.out.println("*-*-*-*-* getUserInfo updateUserInfo" + user);
         return mapper.updateUserInfo(user);
     }
 
     @Transactional
     public int sendEmail(UserDTO user, String authKey) {
         try {
-
             SimpleMailMessage message = new SimpleMailMessage();
 
+            int result;
 
-            // 인증키 db 저장
-            int result = mapper.setAuthKey(authKey, user.getEmail());
+            // 인증 이메일을 이미 보낸 이메일인지 확인
+            int isExist = mapper.sendEmailCheck(user.getEmail());
 
-            if(result == 1 ){
+            if (isExist > 0) {
+                // 존재한다면 이메일 재전송
+                result = mapper.updateLoginAuth(user.getEmail(), authKey);
+            } else {
+                // 존재하지 않는다면 새로 저장
+                result = mapper.setAuthKey(authKey, user.getEmail());
+            }
+
+            if (result == 1) {
                 // 메일 전송 폼 데이터 set
                 message.setFrom("test@dambi.co.kr"); // 보내는 사람
 
@@ -113,6 +120,16 @@ public class UserService {
                 return 1;
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Transactional
+    public int confirmLoginSecret(String email, String authKey) {
+        try {
+            return mapper.confirmLoginSecret(email, authKey);
         } catch (Exception e) {
             e.printStackTrace();
         }

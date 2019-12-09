@@ -18,5 +18,13 @@ public interface UserMapper {
     // 유저 정보 업데이트 하기
     public int updateUserInfo(UserDTO user);
 
+    // 권한 테이블에 이메일, 인증번호 저장하기
     public int setAuthKey(String auth_key, String email);
+
+    // 인증번호 비교하기
+    public int confirmLoginSecret(String email, String auth_key);
+
+    public int sendEmailCheck(String email);
+
+    public int updateLoginAuth(String email, String auth_key);
 }
