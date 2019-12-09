@@ -4,7 +4,6 @@ import com.exdiary.web_backend.dto.UserDTO;
 import com.exdiary.web_backend.mapper.UserMapper;
 import com.exdiary.web_backend.utils.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,7 +36,7 @@ public class UserService {
 
     // 회원가입하기
     @Transactional
-    public int insertUser(UserDTO user) throws Exception{
+    public int insertUser(UserDTO user) throws Exception {
         try {
 
             System.out.println("*-*-*-*-* UserService insertUser");
@@ -45,40 +44,8 @@ public class UserService {
 
             mapper.insetUser(user);
 
-            SimpleMailMessage message = new SimpleMailMessage();
-
-            // 인증키 생성
-            String authKey = new TempKey().getKey(40,false);
-
-            System.out.println("auth Key :" + authKey + "user.getEmail :"  + user.getEmail());
-
-            // 인증키 db 저장
-            mapper.setAuthKey(authKey, user.getEmail());
-
-            System.out.println("***********************");
-
-            // 메일 전송 폼 데이터 set
-            message.setFrom("test@dambi.co.kr"); // 보내는 사람
-
-            // 받는 사람
-            message.setTo(user.getEmail());
-
-            //제목
-            message.setSubject("회원가입을 위한 이메일 인증코드입니다. ");
-
-            //내용
-            message.setText(
-                    new StringBuffer()
-                            .append("<h1>메일인증</h1>").append("<a href='http://localhost:8088/user/emailConfirm?userEmail=")
-                            .append(user.getEmail()).append("&memberAuthKey=")
-                            .append(authKey).append("'target='_blank'>이메일 인증 확인 </a>").toString()
-            );
-            // 메일 전송
-            emailSender.send(message);
-
             return 1;
         } catch (Exception es) {
-            System.out.println("es " + es);
             es.printStackTrace();
         }
         return 0;
@@ -111,6 +78,45 @@ public class UserService {
     public int updateUserInfo(UserDTO user) {
         System.out.println("*-*-*-*-* getUserInfo updateUserInfo" + user);
         return mapper.updateUserInfo(user);
+    }
+
+    @Transactional
+    public int sendEmail(UserDTO user, String authKey) {
+        try {
+
+            SimpleMailMessage message = new SimpleMailMessage();
+
+
+            // 인증키 db 저장
+            int result = mapper.setAuthKey(authKey, user.getEmail());
+
+            if(result == 1 ){
+                // 메일 전송 폼 데이터 set
+                message.setFrom("test@dambi.co.kr"); // 보내는 사람
+
+                // 받는 사람
+                message.setTo(user.getEmail());
+
+                //제목
+                message.setSubject("회원가입을 위한 이메일 인증코드입니다. ");
+
+                //내용
+                message.setText(
+                        new StringBuffer()
+                                .append("회원 가입을 위한 메일인증 입니다 ")
+                                .append("'" + authKey + "'").append(" 코드를 입력해주세요 :D").toString()
+                );
+
+                // 메일 전송
+                emailSender.send(message);
+
+                return 1;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 }

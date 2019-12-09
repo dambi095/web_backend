@@ -3,6 +3,7 @@ package com.exdiary.web_backend.controller;
 import com.exdiary.web_backend.dto.UserDTO;
 import com.exdiary.web_backend.security.JwtTokenProvider;
 import com.exdiary.web_backend.service.UserService;
+import com.exdiary.web_backend.utils.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,10 +89,34 @@ public class UserController {
     /*
      * @method Name : updateUserInfo()
      * @date * @author :2019.12.04 : 권담비
-     * @description : 이메일 인증을 위 시크릿 코드 값에 업데이트하기
+     * @description : 유저정보 업데이트 하기
      */
     @RequestMapping(value = "updateUserInfo", method = RequestMethod.POST)
     public int updateUserInfo(@RequestBody UserDTO user) {
         return service.updateUserInfo(user);
+    }
+
+
+    /*
+     * @method Name : sendEmail()
+     * @date * @author :2019.12.09 : 권담비
+     * @description : 이메일 인증을 위해 인증코드 값 업데이트하기
+     */
+    @RequestMapping(value = "sendEmail", method = RequestMethod.POST)
+    public Map<String, String> sendEmail(@RequestBody UserDTO user) {
+        // 인증키 생성
+        String authKey = new TempKey().getKey(20, false);
+
+        int result = service.sendEmail(user, authKey);
+
+        Map<String, String> map = new HashMap<>();
+
+        if (result == 1) {
+            map.put("authKey", authKey);
+        } else {
+            map.put("authKey", "none");
+        }
+
+        return map;
     }
 }
