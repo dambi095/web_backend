@@ -82,6 +82,7 @@ public class UserService {
         return mapper.updateUserInfo(user);
     }
 
+    // 이메일 인증을 위해 인증코드 값 저장하기
     @Transactional
     public int sendEmail(UserDTO user, String authKey) {
         try {
@@ -129,6 +130,7 @@ public class UserService {
         return 0;
     }
 
+    // 이메일 인증코드 값 확인하기
     @Transactional
     public int confirmLoginSecret(String email, String authKey) {
         try {
@@ -139,4 +141,10 @@ public class UserService {
         return 0;
     }
 
+    // 로그인 하기
+    public boolean logIn(UserDTO user){
+        //UserDetails :: Spring Security에서 사용자의 정보를 담는 인터페이스
+        UserDetails userDetails = this.loadUserByUsername(user.getEmail());
+        return passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
+    }
 }

@@ -101,7 +101,7 @@ public class UserController {
     /*
      * @method Name : sendEmail()
      * @date * @author :2019.12.09 : 권담비
-     * @description : 이메일 인증을 위해 인증코드 값 업데이트하기
+     * @description : 이메일 인증을 위해 인증코드 값 저장하기
      */
     @RequestMapping(value = "sendEmail", method = RequestMethod.POST)
     public Map<String, String> sendEmail(@RequestBody UserDTO user) {
@@ -132,5 +132,34 @@ public class UserController {
         return service.confirmLoginSecret(auth.getEmail(),auth.getAuth_key());
     }
 
+    /*
+     * @method Name : logIn()
+     * @date * @author :2019.12.09 : 권담비
+     * @description : 로그인 하기
+     */
+    @RequestMapping(value = "logIn", method = RequestMethod.POST)
+    public Map<String, Object> logIn(@RequestBody UserDTO user){
+
+        Map<String, Object> map = new HashMap<>();
+
+        if(service.logIn(user)){
+            String token = jwtTokenProvider.createToken(user.getEmail());
+
+            UserDTO dbUser = service.getUserInfo(user.getEmail());
+
+            // Map<String, Object> map = new HashMap<>();
+
+            dbUser.setPassword("");
+
+            dbUser.setToken(token);
+
+            map.put("user", dbUser);
+
+            return map;
+        }
+
+        map.put("Failed login...",null);
+        return map;
+    }
 
 }
