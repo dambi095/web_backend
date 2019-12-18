@@ -3,8 +3,14 @@
 
 <mapper namespace="com.exdiary.web_backend.mapper.DiaryMapper">
     <select id="getDiary" resultType="com.exdiary.web_backend.dto.DiaryDTO">
-        SELECT * FROM diary AS d JOIN userlist AS ds
-        ON d.diary_num = ds.diary_num
-        WHERE ds.email = #{email}
+        SELECT * FROM diary WHERE email=#{email}
     </select>
+
+    <insert id="insertDiaryInfo" parameterType="com.exdiary.web_backend.dto.DiaryDTO" useGeneratedKeys="true" keyProperty="diary_num">
+        INSERT INTO diary (email, userlist, diary_type, diary_title, explanation)
+        VALUES(#{email}, #{email}, #{diary_type}, #{diary_title}, #{explanation})
+        <selectKey keyProperty="diary_num" resultType="integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
 </mapper>

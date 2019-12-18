@@ -29,10 +29,22 @@ public class DiaryController {
      * @date * @author :2019.12.11 : 권담비
      * @description : 일기장 리스트 가져오기
      */
-
     @PostMapping(value = "getDiary")
     public List<DiaryDTO> getDiary(@RequestBody DiaryUserListDTO user){
+        System.out.println("user: "+user);
         List<DiaryDTO> diary = diaryService.getDiary(user.getEmail());
+        System.out.println("diary: " + diary);
         return diary;
     }
+
+    /*
+     * @method Name : insertDiaryInfo()
+     * @date * @author :2019.12.11 : 권담비
+     * @description : 일기장 만들기
+     */
+    @PostMapping(value = "insertDiaryInfo")
+    public int insertDiaryInfo(@RequestBody DiaryDTO diary){
+        return diaryService.insertDiaryInfo(diary);
+    }
+
 }
