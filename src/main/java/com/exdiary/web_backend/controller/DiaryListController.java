@@ -31,4 +31,14 @@ public class DiaryListController {
 
         return diaryList;
     }
+
+    /*
+     * @method Name : insertContents()
+     * @date * @author :2019.12.18 : 권담비
+     * @description : 일기내용 가져오기
+     */
+    @PostMapping(value = "/insertContents")
+    public int insertContents(@RequestBody DiaryListDTO list){
+        return diaryListService.insertContents(list);
+    }
 }

@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exdiary.web_backend.mapper.DiaryListMapper">
+    <!-- 일기 리스트 가져오기 -->
     <select id="getDiaryList" resultType="com.exdiary.web_backend.dto.DiaryListDTO">
         SELECT * FROM diarylist WHERE diary_num=#{diary_num} AND email=#{email}
     </select>
+
+    <!-- 일기 내용 저장하기 -->
+    <insert id="insertContents" parameterType="com.exdiary.web_backend.dto.DiaryListDTO">
+        INSERT INTO diarylist (diary_num, title, contents, image, email)
+        VALUES (#{diary_num}, #{title}, #{contents}, #{image}, #{email})
+    </insert>
 </mapper>
