@@ -8,8 +8,16 @@
     </select>
 
     <!-- 일기 내용 저장하기 -->
-    <insert id="insertContents" parameterType="com.exdiary.web_backend.dto.DiaryListDTO">
+    <insert id="insertContents" parameterType="com.exdiary.web_backend.dto.DiaryListDTO" useGeneratedKeys="true" keyProperty="page_num">
         INSERT INTO diarylist (diary_num, title, contents, image, email)
         VALUES (#{diary_num}, #{title}, #{contents}, #{image}, #{email})
+        <selectKey keyProperty="page_num" resultType="integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
+
+    <!-- 일기 내용 가져오기 -->
+    <select id="getDiaryContent" resultType="com.exdiary.web_backend.dto.DiaryListDTO">
+        SELECT * FROM diaryList WHERE diary_num=#{diary_num} AND page_num=#{page_num}
+    </select>
 </mapper>

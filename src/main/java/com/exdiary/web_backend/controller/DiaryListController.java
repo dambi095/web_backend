@@ -35,10 +35,21 @@ public class DiaryListController {
     /*
      * @method Name : insertContents()
      * @date * @author :2019.12.18 : 권담비
-     * @description : 일기내용 가져오기
+     * @description : 일기내용 저장하기
      */
     @PostMapping(value = "/insertContents")
     public int insertContents(@RequestBody DiaryListDTO list){
         return diaryListService.insertContents(list);
     }
+
+    /*
+     * @method Name : getDiaryContent()
+     * @date * @author :2019.12.19 : 권담비
+     * @description : 일기내용 가져오기
+     */
+    @PostMapping(value = "/getDiaryContent")
+    public List<DiaryListDTO> getDiaryContent(@RequestBody DiaryListDTO list){
+        return diaryListService.getDiaryContent(list.getDiary_num(), list.getPage_num());
+    }
+
 }

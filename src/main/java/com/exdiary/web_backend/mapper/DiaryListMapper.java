@@ -10,7 +10,9 @@ public interface DiaryListMapper {
     // 일기장에 해당하는 일기 리스트 가져오기
     public List<DiaryListDTO> getDiaryList(int diary_num, String email);
 
-    // 일기 내용 저장하
+    // 일기 내용 저장하기
     public int insertContents(DiaryListDTO list);
 
+    // 일기 내용 가져오기
+    public List<DiaryListDTO> getDiaryContent(int diary_num, int page_num);
 }

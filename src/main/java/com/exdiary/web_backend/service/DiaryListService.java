@@ -4,6 +4,7 @@ import com.exdiary.web_backend.dto.DiaryListDTO;
 import com.exdiary.web_backend.mapper.DiaryListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +22,20 @@ public class DiaryListService {
         return diaryList;
     }
 
+    @Transactional
     public int insertContents(DiaryListDTO list) {
-        return diaryListMapper.insertContents(list);
+        int result;
+        try {
+            diaryListMapper.insertContents(list);
+            result = list.getPage_num(); // insert 후 증가된 pageSeq 값 가져오기
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return result;
+    }
+
+    public List<DiaryListDTO> getDiaryContent(int diary_num, int page_num){
+        return diaryListMapper.getDiaryContent(diary_num, page_num);
     }
 }
