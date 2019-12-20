@@ -33,8 +33,24 @@ public class DiaryService {
             result = 0;
         }
 
-        System.out.println("-------------------- result: " + result);
-
         return result;
     }
+
+    @Transactional
+    public int deleteDiary(int diary_num) {
+        try {
+            // 다이어리에 해당하는 일기리스트들 먼저 삭제하기
+            diaryMapper.deleteDiaryList(diary_num);
+            int deleteResult = diaryMapper.deleteDiary(diary_num);
+            if (deleteResult > 0) {
+                return deleteResult;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
 }

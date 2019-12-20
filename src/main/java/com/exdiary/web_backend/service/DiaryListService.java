@@ -38,4 +38,8 @@ public class DiaryListService {
     public List<DiaryListDTO> getDiaryContent(int diary_num, int page_num){
         return diaryListMapper.getDiaryContent(diary_num, page_num);
     }
+
+    public int deleteDiaryList(int diary_num, int page_num){
+        return diaryListMapper.deleteDiaryList(diary_num, page_num);
+    }
 }

@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exdiary.web_backend.mapper.DiaryMapper">
+    <!-- 다이어 목록 가져오기 -->
     <select id="getDiary" resultType="com.exdiary.web_backend.dto.DiaryDTO">
         SELECT * FROM diary WHERE email=#{email}
     </select>
 
+    <!-- 다이어리 만들기 -->
     <insert id="insertDiaryInfo" parameterType="com.exdiary.web_backend.dto.DiaryDTO" useGeneratedKeys="true" keyProperty="diary_num">
         INSERT INTO diary (email, userlist, diary_type, diary_title, explanation)
         VALUES(#{email}, #{email}, #{diary_type}, #{diary_title}, #{explanation})
@@ -13,4 +15,14 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+    <!-- 다이어리 삭제하기 -->
+    <delete id="deleteDiary">
+        DELETE FROM diary where diary_num=#{diary_num}
+    </delete>
+
+    <!-- 다이어리에 해당하는 일기리스트들 싹다 삭제하기 -->
+    <delete id="deleteDiaryList">
+        DELETE FROM diaryList where diary_num=#{diary_num}
+    </delete>
 </mapper>

@@ -47,4 +47,14 @@ public class DiaryController {
         return diaryService.insertDiaryInfo(diary);
     }
 
+    /*
+     * @method Name : deleteDiary()
+     * @date * @author :2019.12.21 : 권담비
+     * @description : 일기장 만들기
+     */
+    @PostMapping(value = "deleteDiary")
+    public int deleteDiary(@RequestBody DiaryDTO diary){
+ return diaryService.deleteDiary(diary.getDiary_num());
+    }
+
 }

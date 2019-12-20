@@ -2,7 +2,6 @@ package com.exdiary.web_backend.mapper;
 
 import com.exdiary.web_backend.dto.DiaryDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -13,4 +12,10 @@ public interface DiaryMapper {
 
     // 다이어리 만들기
     public int insertDiaryInfo(DiaryDTO diary);
+
+    // 다이어리 삭제하기
+    public int deleteDiary(int diary_num);
+
+    // 다이어리에 해당하는 일기 리스트들 싹 다 삭제하기
+    public int deleteDiaryList(int diary_num);
 }
