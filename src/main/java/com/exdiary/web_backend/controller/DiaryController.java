@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /********************
- 일기장 관련 컨트롤러
+ 다이어리 관련 컨트롤러
  ********************/
 
 @RestController
@@ -27,11 +27,11 @@ public class DiaryController {
     /*
      * @method Name : getDiary()
      * @date * @author :2019.12.11 : 권담비
-     * @description : 일기장 리스트 가져오기
+     * @description : 다이어리 리스트 가져오기
      */
     @PostMapping(value = "getDiary")
-    public List<DiaryDTO> getDiary(@RequestBody DiaryUserListDTO user){
-        System.out.println("user: "+user);
+    public List<DiaryDTO> getDiary(@RequestBody DiaryUserListDTO user) {
+        System.out.println("user: " + user);
         List<DiaryDTO> diary = diaryService.getDiary(user.getEmail());
         System.out.println("diary: " + diary);
         return diary;
@@ -43,18 +43,27 @@ public class DiaryController {
      * @description : 일기장 만들기
      */
     @PostMapping(value = "insertDiaryInfo")
-    public int insertDiaryInfo(@RequestBody DiaryDTO diary){
+    public int insertDiaryInfo(@RequestBody DiaryDTO diary) {
         return diaryService.insertDiaryInfo(diary);
     }
 
     /*
      * @method Name : deleteDiary()
      * @date * @author :2019.12.21 : 권담비
-     * @description : 일기장 만들기
+     * @description : 다이어리 삭제하
      */
     @PostMapping(value = "deleteDiary")
-    public int deleteDiary(@RequestBody DiaryDTO diary){
- return diaryService.deleteDiary(diary.getDiary_num());
+    public int deleteDiary(@RequestBody DiaryDTO diary) {
+        return diaryService.deleteDiary(diary.getDiary_num());
     }
 
+    /*
+     * @method Name : updateDiaryInfo()
+     * @date * @author :2019.12.23 : 권담비
+     * @description : 다이어리 수정하
+     */
+    @PostMapping(value = "updateDiaryInfo")
+    public int updateDiaryInfo(@RequestBody DiaryDTO diary) {
+        return diaryService.updateDiaryInfo(diary.getDiary_num(), diary.getDiary_title(), diary.getExplanation());
+    }
 }

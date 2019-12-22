@@ -19,7 +19,7 @@
     </select>
 
     <!-- 유저 정보 업데이트 하기  -->
-    <update id="updateUserInfo" parameterType="com.exdiary.web_backend.dto.UserDTO" >
+    <update id="updateUserInfo" >
         UPDATE user SET phone=#{phone}, profile_img=#{profile_img}
         WHERE email=#{email}
     </update>

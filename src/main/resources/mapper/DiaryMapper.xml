@@ -25,4 +25,10 @@
     <delete id="deleteDiaryList">
         DELETE FROM diaryList where diary_num=#{diary_num}
     </delete>
+
+    <!-- 다이어리 수정하기 -->
+    <update id="updateDiaryInfo">
+        UPDATE diary SET diary_title=#{diary_title}, explanation=#{explanation}
+        WHERE diary_num=#{diary_num}
+    </update>
 </mapper>

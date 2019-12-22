@@ -52,5 +52,8 @@ public class DiaryService {
         return 0;
     }
 
+    public int updateDiaryInfo(int diary_num, String diary_title, String explanation) {
+        return diaryMapper.updateDiaryInfo(diary_num, diary_title, explanation);
+    }
 
 }
