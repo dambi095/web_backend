@@ -17,5 +17,5 @@ public interface DiaryListMapper {
     public List<DiaryListDTO> getDiaryContent(int diary_num, int page_num);
 
     // 일기 삭제하기
-    public int deleteDiaryList(int diary_num, int page_num);
+    public int deleteDiaryContents(int diary_num, int page_num);
 }

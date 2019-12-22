@@ -21,9 +21,9 @@
         SELECT * FROM diaryList WHERE diary_num=#{diary_num} AND page_num=#{page_num}
     </select>
 
-    <!-- 일기장 관련 일기 목록 삭제하기 -->
-    <delete id="deleteDiaryList">
-        delete from diaryList where diary_num=#{diary_num}
+    <!-- 일기 삭제하기 -->
+    <delete id="deleteDiaryContents">
+        delete from diaryList where diary_num=#{diary_num} AND page_num=#{page_num}
     </delete>
 
 </mapper>
