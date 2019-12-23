@@ -26,4 +26,9 @@
         delete from diaryList where diary_num=#{diary_num} AND page_num=#{page_num}
     </delete>
 
+    <!-- 일기내용 수정하기 -->
+    <update id="updateDiaryContents">
+        UPDATE diarylist SET title=#{title}, contents=#{contents}, image=#{image}
+        WHERE diary_num=#{diary_num} AND page_num=#{page_num}
+    </update>
 </mapper>

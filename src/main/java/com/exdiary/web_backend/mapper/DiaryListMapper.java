@@ -18,4 +18,7 @@ public interface DiaryListMapper {
 
     // 일기 삭제하기
     public int deleteDiaryContents(int diary_num, int page_num);
+
+    // 일기 내용 수정하기
+    public int updateDiaryContents(DiaryListDTO list);
 }

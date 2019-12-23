@@ -61,4 +61,13 @@ public class DiaryListController {
         return diaryListService.deleteDiaryContents(list.getDiary_num(), list.getPage_num());
     }
 
+    /*
+     * @method Name : updateDiaryContents()
+     * @date * @author :2019.12.23 : 권담비
+     * @description : 일기 내용 수정하기
+     */
+    @PostMapping(value = "updateDiaryContents")
+    public int updateDiaryContents(@RequestBody DiaryListDTO list){
+        return diaryListService.updateDiaryContents(list);
+    }
 }

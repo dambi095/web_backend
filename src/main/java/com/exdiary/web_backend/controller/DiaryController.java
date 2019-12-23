@@ -60,7 +60,7 @@ public class DiaryController {
     /*
      * @method Name : updateDiaryInfo()
      * @date * @author :2019.12.23 : 권담비
-     * @description : 다이어리 수정하
+     * @description : 다이어리 수정하기
      */
     @PostMapping(value = "updateDiaryInfo")
     public int updateDiaryInfo(@RequestBody DiaryDTO diary) {
