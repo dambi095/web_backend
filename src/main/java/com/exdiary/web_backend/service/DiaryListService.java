@@ -15,9 +15,9 @@ public class DiaryListService {
     DiaryListMapper diaryListMapper;
 
 
-    public List<DiaryListDTO> getDiaryList(int diary_num, String email) {
-
-        List<DiaryListDTO> diaryList = diaryListMapper.getDiaryList(diary_num, email);
+    public List<DiaryListDTO> getDiaryList(int diary_num, String write_date) {
+        System.out.println("!!!!"+ write_date + diary_num);
+        List<DiaryListDTO> diaryList = diaryListMapper.getDiaryList(diary_num, write_date);
 
         return diaryList;
     }

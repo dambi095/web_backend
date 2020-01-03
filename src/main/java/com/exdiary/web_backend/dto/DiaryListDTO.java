@@ -12,7 +12,7 @@ public class DiaryListDTO {
     private String title;
     private String contents;
     private String nickname;
-    private Date write_date;
+    private String write_date;
     private String email;
     private String image;
 }

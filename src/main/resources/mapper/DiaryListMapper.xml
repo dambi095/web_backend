@@ -4,7 +4,7 @@
 <mapper namespace="com.exdiary.web_backend.mapper.DiaryListMapper">
     <!-- 일기 리스트 가져오기 -->
     <select id="getDiaryList" resultType="com.exdiary.web_backend.dto.DiaryListDTO">
-        SELECT * FROM diarylist WHERE diary_num=#{diary_num} AND email=#{email}
+        SELECT * FROM diarylist WHERE diary_num=#{diary_num} AND DATE(write_date)=#{write_date}
     </select>
 
     <!-- 일기 내용 저장하기 -->

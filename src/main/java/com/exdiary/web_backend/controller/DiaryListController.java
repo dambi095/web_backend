@@ -25,9 +25,9 @@ public class DiaryListController {
      */
     @PostMapping(value = "getDiaryList")
     public List<DiaryListDTO> getDiaryList(@RequestBody DiaryListDTO list) {
-
-        List<DiaryListDTO> diaryList = diaryListService.getDiaryList(list.getDiary_num(), list.getEmail());
-
+        System.out.println("diaryList: "+  list.getWrite_date().substring(0,10));
+        List<DiaryListDTO> diaryList = diaryListService.getDiaryList(list.getDiary_num(), list.getWrite_date().substring(0,10));
+        System.out.println("diaryList: "+  diaryList);
         return diaryList;
     }
 
