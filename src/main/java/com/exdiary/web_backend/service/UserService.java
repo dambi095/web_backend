@@ -147,4 +147,8 @@ public class UserService {
         UserDetails userDetails = this.loadUserByUsername(user.getEmail());
         return passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
     }
+
+    public String getCurDate() {
+        return mapper.getCurDate();
+    }
 }

@@ -6,10 +6,7 @@ import com.exdiary.web_backend.security.JwtTokenProvider;
 import com.exdiary.web_backend.service.UserService;
 import com.exdiary.web_backend.utils.TempKey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -159,4 +156,9 @@ public class UserController {
         return map;
     }
 
+    @PostMapping(value = "getCurDate")
+    public String getCurDate(){
+        System.out.println("**************************" + service.getCurDate());
+        return service.getCurDate();
+    }
 }

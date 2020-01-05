@@ -50,4 +50,9 @@
     <delete id="deleteLoginAuth" parameterType="String" >
         DELETE FROM login_auth WHERE email=#{email}
     </delete>
+
+    <!-- 현재날짜 가져오기 -->
+    <select id="getCurDate" resultType="String">
+        SELECT current_date()
+    </select>
 </mapper>

@@ -30,4 +30,5 @@ public interface UserMapper {
 
     public int deleteLoginAuth(String email);
 
+    public String getCurDate();
 }

@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/user/logIn","/user/insertUser", "/user/registerCheck"
-                        , "/user/sendEmail","/user/confirmLoginSecret", "/user/sendEmailCheck").permitAll()
+                        , "/user/sendEmail","/user/confirmLoginSecret", "/user/sendEmailCheck", "/user/getCurDate").permitAll()
                 .anyRequest().authenticated();
     }
 
