@@ -4,7 +4,7 @@
 <mapper namespace="com.exdiary.web_backend.mapper.DiaryMapper">
     <!-- 다이어 목록 가져오기 -->
     <select id="getDiary" resultType="com.exdiary.web_backend.dto.DiaryDTO">
-        SELECT * FROM diary WHERE email=#{email}
+        SELECT * FROM diary WHERE email=#{email} ORDER BY create_date DESC
     </select>
 
     <!-- 다이어리 만들기 -->
