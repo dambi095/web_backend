@@ -56,4 +56,7 @@ public class DiaryService {
         return diaryMapper.updateDiaryInfo(diary_num, diary_title, explanation);
     }
 
+    public List<DiaryDTO> searchDiaryTitle(String diary_title, String email) {
+        return diaryMapper.searchDiaryTitle(diary_title, email);
+    }
 }

@@ -1,5 +1,6 @@
 package com.exdiary.web_backend.service;
 
+import com.exdiary.web_backend.dto.DiaryDTO;
 import com.exdiary.web_backend.dto.UserDTO;
 import com.exdiary.web_backend.mapper.UserMapper;
 import com.exdiary.web_backend.utils.TempKey;
@@ -148,7 +149,9 @@ public class UserService {
         return passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
     }
 
+    // mysql에서 현재값 가져오기
     public String getCurDate() {
         return mapper.getCurDate();
     }
+
 }

@@ -66,4 +66,14 @@ public class DiaryController {
     public int updateDiaryInfo(@RequestBody DiaryDTO diary) {
         return diaryService.updateDiaryInfo(diary.getDiary_num(), diary.getDiary_title(), diary.getExplanation());
     }
+
+    /*
+     * @method Name : searchDiaryTitle()
+     * @date * @author :2020.01.05 : 권담비
+     * @description : 다이어리 타이틀로 검색하기
+     */
+    @PostMapping(value = "searchDiaryTitle")
+    public List<DiaryDTO> searchDiaryTitle(@RequestBody DiaryDTO diary) {
+        return diaryService.searchDiaryTitle(diary.getDiary_title(), diary.getEmail());
+    }
 }

@@ -21,4 +21,7 @@ public interface DiaryMapper {
 
     // 다이어리 수정하기
     public int updateDiaryInfo(int diary_num, String diary_title, String explanation);
+
+    // 다이어리 제목으로 검색하기
+    public List<DiaryDTO> searchDiaryTitle(String diary_title, String email);
 }

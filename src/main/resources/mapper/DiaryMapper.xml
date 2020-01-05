@@ -31,4 +31,8 @@
         UPDATE diary SET diary_title=#{diary_title}, explanation=#{explanation}
         WHERE diary_num=#{diary_num}
     </update>
+
+    <select id="searchDiaryTitle" resultType="com.exdiary.web_backend.dto.DiaryDTO">
+        SELECT * FROM diary WHERE email=#{email} AND diary_title like CONCAT('%', #{diary_title}, '%')
+    </select>
 </mapper>
