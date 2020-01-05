@@ -33,6 +33,6 @@
     </update>
 
     <select id="searchDiaryTitle" resultType="com.exdiary.web_backend.dto.DiaryDTO">
-        SELECT * FROM diary WHERE email=#{email} AND diary_title like CONCAT('%', #{diary_title}, '%')
+        SELECT * FROM diary WHERE email=#{email} AND diary_title like CONCAT('%', #{diary_title}, '%') ORDER BY create_date DESC
     </select>
 </mapper>
